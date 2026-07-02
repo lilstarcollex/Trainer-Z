@@ -55,16 +55,28 @@ describe('Set Validation', () => {
   });
 
   it('should fail if weight is out of bounds', () => {
-    const data = {
-      weight: -1,
+    const base = {
       reps: 10,
       reachedFailure: false,
       failureRepNumber: null,
-      difficulty: 'Легко',
+      difficulty: 'Легко' as const,
       comment: null,
     };
-    const result = setValidationSchema.safeParse(data);
-    expect(result.success).toBe(false);
+    
+    expect(setValidationSchema.safeParse({ ...base, weight: -1 }).success).toBe(false);
+    expect(setValidationSchema.safeParse({ ...base, weight: 501 }).success).toBe(false);
+  });
+
+  it('should pass fractional weights', () => {
+    const data = {
+      weight: 50.5,
+      reps: 10,
+      reachedFailure: false,
+      failureRepNumber: null,
+      difficulty: 'Легко' as const,
+      comment: null,
+    };
+    expect(setValidationSchema.safeParse(data).success).toBe(true);
   });
 
   it('should fail if reps is out of bounds', () => {

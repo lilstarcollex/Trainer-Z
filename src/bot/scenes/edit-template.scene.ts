@@ -52,7 +52,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
       if (text === '/cancel') {
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
       if (text.length < 2) {
         await ctx.reply('Слишком короткое название. Попробуйте еще раз:');
@@ -62,7 +62,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
       await ctx.reply('Название обновлено!');
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
 
     if (!ctx.has('callback_query') || !ctx.callbackQuery || !('data' in ctx.callbackQuery)) return;
@@ -72,7 +72,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
       if (data === 'CANCEL') {
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
 
       if (data.startsWith('GROUP_')) {
@@ -105,7 +105,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
         await ctx.answerCbQuery('Упражнение добавлено!');
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
       return;
     }
@@ -137,7 +137,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
     if (data === 'CANCEL_RENAME') {
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
 
     if (data === 'ADD_EX') {
@@ -159,7 +159,7 @@ export const editTemplateWizard = new Scenes.WizardScene<MyContext>(
       
       // Refresh
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
   }
 );

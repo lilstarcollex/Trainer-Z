@@ -37,4 +37,21 @@ describe('AI Service', () => {
     const analysis = await generateDailyAnalysis({});
     expect(analysis).toContain('Не настроен ключ OpenRouter');
   });
+
+  it('should handle API response error (not ok)', async () => {
+    process.env.OPENROUTER_API_KEY = 'test_key';
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: false,
+      text: async () => 'API Error'
+    });
+    const analysis = await generateDailyAnalysis({ template: { name: 'A' }, sets: [] });
+    expect(analysis).toContain('Произошла ошибка при генерации AI-анализа (API Error)');
+  });
+
+  it('should handle network fetch throw', async () => {
+    process.env.OPENROUTER_API_KEY = 'test_key';
+    global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
+    const analysis = await generateDailyAnalysis({ template: { name: 'A' }, sets: [] });
+    expect(analysis).toContain('Произошла ошибка при генерации AI-анализа (Network Error)');
+  });
 });

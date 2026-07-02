@@ -4,7 +4,7 @@ import { getCompletedSessionsForLast24Hours, generateDailyAnalysis } from './mod
 
 export function startCronJobs(bot: Telegraf<any>) {
   // Run every day at 19:00 UTC (22:00 MSK)
-  cron.schedule('0 19 * * *', async () => {
+  cron.schedule('0 22 * * *', async () => {
     console.log('Running daily AI analysis cron job...');
     try {
       const sessions = await getCompletedSessionsForLast24Hours();
@@ -29,6 +29,6 @@ export function startCronJobs(bot: Telegraf<any>) {
     } catch (e) {
       console.error('Error in daily cron job:', e);
     }
-  });
+  }, { timezone: 'Europe/Moscow' });
   console.log('Cron jobs scheduled.');
 }

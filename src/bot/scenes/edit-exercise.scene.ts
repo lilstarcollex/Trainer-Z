@@ -45,7 +45,7 @@ export const editExerciseWizard = new Scenes.WizardScene<MyContext>(
       if (text === '/cancel') {
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
       if (text.length < 2) {
         await ctx.reply('Слишком короткое название. Попробуйте еще раз:');
@@ -55,7 +55,7 @@ export const editExerciseWizard = new Scenes.WizardScene<MyContext>(
       await ctx.reply('Название обновлено!');
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
 
     if (state.step === 'RENAME_MUSCLE') {
@@ -65,7 +65,7 @@ export const editExerciseWizard = new Scenes.WizardScene<MyContext>(
       if (data === 'CANCEL_RENAME') {
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
 
       if (data.startsWith('GROUP_')) {
@@ -74,7 +74,7 @@ export const editExerciseWizard = new Scenes.WizardScene<MyContext>(
         await ctx.answerCbQuery('Целевая мышца обновлена!');
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
       return;
     }
@@ -120,7 +120,7 @@ export const editExerciseWizard = new Scenes.WizardScene<MyContext>(
     if (data === 'CANCEL_RENAME') {
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
   }
 );

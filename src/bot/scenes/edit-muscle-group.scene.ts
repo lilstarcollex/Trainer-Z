@@ -40,7 +40,7 @@ export const editMuscleGroupWizard = new Scenes.WizardScene<MyContext>(
       if (text === '/cancel') {
         state.step = 'IDLE';
         ctx.wizard.selectStep(0);
-        return ctx.wizard.steps[0](ctx);
+        return (ctx.wizard as any).steps[0](ctx);
       }
       if (text.length < 2) {
         await ctx.reply('Слишком короткое название. Попробуйте еще раз:');
@@ -50,7 +50,7 @@ export const editMuscleGroupWizard = new Scenes.WizardScene<MyContext>(
       await ctx.reply('Название обновлено!');
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
 
     // Default IDLE handling
@@ -87,7 +87,7 @@ export const editMuscleGroupWizard = new Scenes.WizardScene<MyContext>(
     if (data === 'CANCEL_RENAME') {
       state.step = 'IDLE';
       ctx.wizard.selectStep(0);
-      return ctx.wizard.steps[0](ctx);
+      return (ctx.wizard as any).steps[0](ctx);
     }
   }
 );

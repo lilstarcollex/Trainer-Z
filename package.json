@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsx src/main.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "npx dotenv-cli -e .env.test -- npx prisma db push --accept-data-loss && npx dotenv-cli -e .env.test -- vitest run",
+    "test:coverage": "npx dotenv-cli -e .env.test -- npx prisma db push --accept-data-loss && npx dotenv-cli -e .env.test -- vitest run --coverage",
+    "test:watch": "npx dotenv-cli -e .env.test -- vitest",
     "seed": "npx tsx prisma/seed.ts",
     "typecheck": "tsc --noEmit"
   },
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/node": "^26.1.0",
     "@types/node-cron": "^3.0.11",
+    "@vitest/coverage-v8": "^4.1.9",
     "eslint": "^10.6.0",
     "prettier": "^3.9.4",
     "ts-node": "^10.9.2",
