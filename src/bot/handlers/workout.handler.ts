@@ -127,13 +127,13 @@ export async function handleWorkoutActions(ctx: MyContext) {
       await ctx.scene.enter('LOG_SET_WIZARD');
     }
   } else if (data.startsWith('START_TEMPLATE_')) {
-    const code = data.replace('START_TEMPLATE_', '');
+    const templateId = parseInt(data.replace('START_TEMPLATE_', ''), 10);
     const active = await getActiveWorkout(user.id);
     if (active) {
       await ctx.answerCbQuery('У вас уже есть активная тренировка!', { show_alert: true });
       return;
     }
-    await startWorkout(user.id, code);
+    await startWorkout(user.id, templateId);
     ctx.session.currentExerciseIndex = 0;
     await ctx.answerCbQuery();
     await showWorkoutMenu(ctx);

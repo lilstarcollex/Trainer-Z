@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import { setupBot } from './bot/bot.js';
 import { prisma } from './prisma/client.js';
+import { startCronJobs } from './cron.js';
 
 dotenv.config();
 
@@ -18,6 +19,9 @@ async function bootstrap() {
     console.log('Connecting to database...');
     await prisma.$connect();
     console.log('Database connected.');
+
+    // Start the background cron jobs
+    startCronJobs(bot);
 
     bot.launch();
     console.log('Bot is running.');

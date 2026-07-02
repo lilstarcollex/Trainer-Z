@@ -17,6 +17,31 @@ export interface MySession extends Scenes.WizardSession<Scenes.WizardSessionData
     isEdit?: boolean;
     setId?: number;
   };
+
+  createExerciseState?: {
+    name?: string;
+    targetMuscle?: string;
+  };
+
+  createTemplateState?: {
+    name?: string;
+    exerciseIds?: number[];
+  };
+
+  editTemplateState?: {
+    templateId: number;
+    step?: 'IDLE' | 'RENAME' | 'ADD_EXERCISE';
+  };
+
+  editExerciseState?: {
+    exerciseId: number;
+    step?: 'IDLE' | 'RENAME' | 'RENAME_MUSCLE';
+  };
+
+  editMuscleGroupState?: {
+    muscleGroupId: number;
+    step?: 'IDLE' | 'RENAME';
+  };
 }
 
 export interface MyContext extends Context {

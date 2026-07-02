@@ -11,15 +11,30 @@ model User {
   id         Int              @id @default(autoincrement())
   telegramId BigInt           @unique
   username   String?
-  createdAt  DateTime         @default(now())
+  createdAt  DateTime          @default(now())
   sessions   WorkoutSession[]
+  exercises  Exercise[]
+  templates  WorkoutTemplate[]
+  muscleGroups MuscleGroup[]
+}
+
+model MuscleGroup {
+  id        Int        @id @default(autoincrement())
+  name      String
+  userId    Int?
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises Exercise[]
+  createdAt DateTime   @default(now())
 }
 
 model Exercise {
   id               Int                       @id @default(autoincrement())
   name             String
-  targetMuscle     String
+  muscleGroupId    Int?
+  muscleGroup      MuscleGroup?              @relation(fields: [muscleGroupId], references: [id], onDelete: SetNull)
   isTemplate       Boolean                   @default(true)
+  userId           Int?
+  user             User?                     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt        DateTime                  @default(now())
   templateMappings WorkoutTemplateExercise[]
   sets             WorkoutSet[]
@@ -28,7 +43,9 @@ model Exercise {
 model WorkoutTemplate {
   id        Int                       @id @default(autoincrement())
   name      String
-  code      String                    @unique
+  code      String?                   @unique
+  userId    Int?
+  user      User?                     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime                  @default(now())
   exercises WorkoutTemplateExercise[]
   sessions  WorkoutSession[]

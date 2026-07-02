@@ -18,6 +18,7 @@
     "@prisma/client": "^5.21.1",
     "csv-stringify": "^6.8.0",
     "dotenv": "^17.4.2",
+    "node-cron": "^4.5.0",
     "prisma": "^5.21.1",
     "telegraf": "^4.16.3",
     "telegraf-session-local": "^2.1.1",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
+    "@types/node-cron": "^3.0.11",
     "eslint": "^10.6.0",
     "prettier": "^3.9.4",
     "ts-node": "^10.9.2",

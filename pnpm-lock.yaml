@@ -216,6 +216,9 @@ importers:
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
+      node-cron:
+        specifier: ^4.5.0
+        version: 4.5.0
       prisma:
         specifier: ^5.21.1
         version: 5.21.1
@@ -232,6 +235,9 @@ importers:
       '@types/node':
         specifier: ^26.1.0
         version: 26.1.0
+      '@types/node-cron':
+        specifier: ^3.0.11
+        version: 3.0.11
       eslint:
         specifier: ^10.6.0
         version: 10.6.0(jiti@2.7.0)
@@ -655,6 +661,9 @@ packages:
   '@types/lowdb@1.0.15':
     resolution: {integrity: sha512-xaMNIveDCryK4UvnUJOc2BCOH0lPivdvWHrutsLryo9r9Id3RqZq2RDmT4eddiEPYzu7nJMw6nFIcVifcqjWqg==}
 
+  '@types/node-cron@3.0.11':
+    resolution: {integrity: sha512-0ikrnug3/IyneSHqCBeslAhlK2aBfYek1fGo4bP4QnZPmiqSGRK+Oy7ZMisLWkesffJvQ1cqAcBnJC+8+nxIAg==}
+
   '@types/node@26.1.0':
     resolution: {integrity: sha512-O0A1G3xPGy4w7AgQdAQYUlQ+BKk2Oovw8eRpofyp5KdBZULnbe+WqaOVNrm705SHphCiG4XHsACrSmPu1f+Kgw==}
 
@@ -1034,6 +1043,10 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  node-cron@4.5.0:
+    resolution: {integrity: sha512-4Trh+kjvbXokyJkwQumvD5YAgeJfgHLR/sKyu71uSmxfCR5QMO1hldpvmFZOICN5pLgNY+J5Y8+ar3XKo5/4tQ==}
+    engines: {node: '>=20'}
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -1605,6 +1618,8 @@ snapshots:
     dependencies:
       '@types/lodash': 4.17.24
 
+  '@types/node-cron@3.0.11': {}
+
   '@types/node@26.1.0':
     dependencies:
       undici-types: 8.3.0
@@ -1970,6 +1985,8 @@ snapshots:
   nanoid@3.3.15: {}
 
   natural-compare@1.4.0: {}
+
+  node-cron@4.5.0: {}
 
   node-fetch@2.7.0:
     dependencies:

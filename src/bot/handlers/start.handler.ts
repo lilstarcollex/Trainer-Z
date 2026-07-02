@@ -6,7 +6,7 @@ import { getActiveWorkout } from '../../modules/workouts/workout.service.js';
 export const mainMenuKeyboard = Markup.keyboard([
   ['Начать тренировку', 'История'],
   ['Прогресс', 'Упражнения'],
-  ['Экспорт', 'Помощь']
+  ['Настройки', 'Экспорт', 'Помощь']
 ]).resize();
 
 export async function handleStart(ctx: MyContext) {
