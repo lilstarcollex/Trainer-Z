@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int              @id @default(autoincrement())
+  telegramId BigInt           @unique
+  username   String?
+  createdAt  DateTime         @default(now())
+  sessions   WorkoutSession[]
+}
+
+model Exercise {
+  id               Int                       @id @default(autoincrement())
+  name             String
+  targetMuscle     String
+  isTemplate       Boolean                   @default(true)
+  createdAt        DateTime                  @default(now())
+  templateMappings WorkoutTemplateExercise[]
+  sets             WorkoutSet[]
+}
+
+model WorkoutTemplate {
+  id        Int                       @id @default(autoincrement())
+  name      String
+  code      String                    @unique
+  createdAt DateTime                  @default(now())
+  exercises WorkoutTemplateExercise[]
+  sessions  WorkoutSession[]
+}
+
+model WorkoutTemplateExercise {
+  id         Int             @id @default(autoincrement())
+  templateId Int
+  exerciseId Int
+  order      Int
+  template   WorkoutTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  exercise   Exercise        @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  createdAt  DateTime        @default(now())
+
+  @@unique([templateId, exerciseId])
+}
+
+model WorkoutSession {
+  id         Int             @id @default(autoincrement())
+  userId     Int
+  templateId Int
+  status     String          @default("ACTIVE") // ACTIVE, COMPLETED, CANCELLED
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template   WorkoutTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  sets       WorkoutSet[]
+}
+
+model WorkoutSet {
+  id               Int            @id @default(autoincrement())
+  sessionId        Int
+  exerciseId       Int
+  setNumber        Int
+  weight           Int            // in grams
+  reps             Int
+  reachedFailure   Boolean
+  failureRepNumber Int?
+  difficulty       String         // EASY, NORMAL, HARD, HELL
+  comment          String?
+  createdAt        DateTime       @default(now())
+  session          WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise         Exercise       @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+}
