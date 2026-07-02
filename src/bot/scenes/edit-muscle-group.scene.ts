@@ -16,7 +16,7 @@ export const editMuscleGroupWizard = new Scenes.WizardScene<MyContext>(
 
     state.step = 'IDLE';
 
-    let msg = `*Редактирование группы мышц:*\nНазвание: ${group.name}\n`;
+    const msg = `*Редактирование группы мышц:*\nНазвание: ${group.name}\n`;
 
     const buttons: any[] = [];
     buttons.push([Markup.button.callback('✏️ Изменить название', 'RENAME')]);

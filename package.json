@@ -9,7 +9,10 @@
     "test:coverage": "npx dotenv-cli -e .env.test -- npx prisma db push --accept-data-loss && npx dotenv-cli -e .env.test -- vitest run --coverage",
     "test:watch": "npx dotenv-cli -e .env.test -- vitest",
     "seed": "npx tsx prisma/seed.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src tests",
+    "build": "tsc",
+    "smoke": "npx tsx smoke.ts"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +37,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.1",
     "vitest": "^4.1.9"
   }
 }
